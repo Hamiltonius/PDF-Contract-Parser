@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeOS - Personal AI Operating System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>LifeOS</h1>
+            <p class="subtitle">Your Personal AI Operating System</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Navigation Tabs -->
+            <nav class="tabs">
+                <button class="tab-button active" data-tab="dashboard">Dashboard</button>
+                <button class="tab-button" data-tab="tasks">Tasks</button>
+                <button class="tab-button" data-tab="calendar">Calendar</button>
+                <button class="tab-button" data-tab="email">Email</button>
+                <button class="tab-button" data-tab="planner">Planner</button>
+                <button class="tab-button" data-tab="documents">Documents</button>
+            </nav>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <h2>Dashboard</h2>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>Today's Overview</h3>
+                        <div id="daily-overview">
+                            <p>Loading...</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="createDailyPlan()">Generate Daily Plan</button>
+                    </div>
+                    <div class="card">
+                        <h3>Upcoming Tasks</h3>
+                        <div id="upcoming-tasks">
+                            <p>Loading...</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Calendar Events</h3>
+                        <div id="upcoming-events">
+                            <p>Loading...</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="syncCalendar()">Sync Calendar</button>
+                    </div>
+                    <div class="card">
+                        <h3>Unread Emails</h3>
+                        <div id="email-summary">
+                            <p>Loading...</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="summarizeEmails()">Summarize</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks Tab -->
+            <div id="tasks" class="tab-content">
+                <h2>Task Management</h2>
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="showCreateTaskForm()">Create Task</button>
+                    <button class="btn btn-secondary" onclick="prioritizeTasks()">Prioritize Tasks</button>
+                </div>
+                <div id="create-task-form" class="form-container" style="display:none;">
+                    <h3>Create New Task</h3>
+                    <form onsubmit="createTask(event)">
+                        <input type="text" id="task-title" placeholder="Task title" required>
+                        <textarea id="task-description" placeholder="Description"></textarea>
+                        <select id="task-priority">
+                            <option value="1">Priority 1 (Highest)</option>
+                            <option value="2">Priority 2</option>
+                            <option value="3" selected>Priority 3 (Medium)</option>
+                            <option value="4">Priority 4</option>
+                            <option value="5">Priority 5 (Lowest)</option>
+                        </select>
+                        <input type="date" id="task-due-date" placeholder="Due date">
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideCreateTaskForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="tasks-list" class="content-area">
+                    <p>Loading tasks...</p>
+                </div>
+            </div>
+
+            <!-- Calendar Tab -->
+            <div id="calendar" class="tab-content">
+                <h2>Calendar</h2>
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="syncCalendar()">Sync Events</button>
+                    <button class="btn btn-secondary" onclick="findFreeTime()">Find Free Time</button>
+                </div>
+                <div id="calendar-events" class="content-area">
+                    <p>Loading calendar events...</p>
+                </div>
+            </div>
+
+            <!-- Email Tab -->
+            <div id="email" class="tab-content">
+                <h2>Email Management</h2>
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="syncEmails()">Sync Emails</button>
+                    <button class="btn btn-secondary" onclick="extractTasksFromEmails()">Extract Tasks</button>
+                </div>
+                <div id="email-list" class="content-area">
+                    <p>Loading emails...</p>
+                </div>
+            </div>
+
+            <!-- Planner Tab -->
+            <div id="planner" class="tab-content">
+                <h2>AI Planner</h2>
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="createDailyPlan()">Daily Plan</button>
+                    <button class="btn btn-primary" onclick="createWeeklyPlan()">Weekly Plan</button>
+                    <button class="btn btn-secondary" onclick="optimizeSchedule()">Optimize Schedule</button>
+                </div>
+                <div id="planner-output" class="content-area">
+                    <p>Click a button above to generate a plan...</p>
+                </div>
+            </div>
+
+            <!-- Documents Tab -->
+            <div id="documents" class="tab-content">
+                <h2>Document Management</h2>
+                <div class="upload-area">
+                    <h3>Upload PDF Document</h3>
+                    <input type="file" id="file-upload" accept=".pdf">
+                    <button class="btn btn-primary" onclick="uploadDocument()">Upload & Process</button>
+                </div>
+                <div id="document-result" class="content-area">
+                    <p>Upload a PDF to process...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>LifeOS v1.0.0 - Personal AI Operating System</p>
+        </footer>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display:none;">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
